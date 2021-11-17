@@ -26,7 +26,8 @@ public class TestDbServlet extends HttpServlet {
 		String user = "springstudent";
 		String pass = "springstudent";
 		
-		String jdbcUrl = "jdbc:mysql:localhost:3306/web_customer_tracker?useSSL=false";
+		// get connection to database
+		String jdbcUrl = "jdbc:mysql://localhost:3306/web_customer_tracker?useSSL=false&serverTimezone=UTC";
 		String driver = "com.mysql.jdbc.Driver";
 		
 		// get connection to database
@@ -41,6 +42,7 @@ public class TestDbServlet extends HttpServlet {
 			myConn.close();
 		}	catch (Exception e)	{
 			e.printStackTrace();
+			throw new ServletException(e);
 		}
 	}
 

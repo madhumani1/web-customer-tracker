@@ -17,6 +17,12 @@ List Customers
 	
 	<div id="container">
 		<div id="content">
+		
+			<!-- put new button: Add Customer -->
+			<!-- showFormForAdd will call our Spring Controller Mapping -->
+			<input type="button" value="Add Customer"
+			onclick="window.location.href='showFormForAdd'; return false;" class="add-button" />
+			
 			<!--  add our html table here -->
 			<table>
 				<tr>

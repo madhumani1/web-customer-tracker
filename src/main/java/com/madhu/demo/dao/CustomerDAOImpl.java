@@ -10,7 +10,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
+//import org.springframework.transaction.annotation.Transactional;
 
 import com.madhu.demo.entity.Customer;
 
@@ -35,9 +35,13 @@ public class CustomerDAOImpl implements CustomerDAO {
 	 * The Spring magic happens behind the scenes.
 	 * 
 	 * This is in place of session.beginTransaction(); -> DO HIBERATE STUFF -> session.getTransaction(). commit()
+	 * 
+	 * If you are using Service class, then remove @transactional, 
+	 * because we want this DAO implementation to run in the context of the transaction 
+	 * that was defined by the service layer. 
 	 */
 	@Override
-	@Transactional
+	//@Transactional
 	public List<Customer> getCustomers() {
 		// get the current Hibernate session
 		Session currentSession = sessionFactory.getCurrentSession();

@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.madhu.demo.dao.CustomerDAO;
 import com.madhu.demo.entity.Customer;
 import com.madhu.demo.service.CustomerService;
 
@@ -82,5 +81,12 @@ public class CustomerController {
 		return "redirect:list";
 	}
 	
-	
+	@GetMapping("/delete")
+	public String deleteCustomer(@RequestParam("customerId") int theId)	{
+		//delete the customer
+		customerService.deleteCustomer(theId);
+		
+		
+		return "redirect:list";
+	}
 }

@@ -27,12 +27,13 @@ public class CustomerServiceImpl implements CustomerService {
 	private CustomerDAO customerDAO;
 	
 	// Mark for transactional. 
-	@Override
+	/*@Override
 	@Transactional
-	public List<Customer> getCustomers() {
+	public List<Customer> getCustomers(int theSortField) {
 		// return results
-		return customerDAO.getCustomers();
-	}
+		//return customerDAO.getCustomers();
+		return customerDAO.getCustomers(theSortField);
+	}*/
 	
 	@Override
 	@Transactional
@@ -55,7 +56,12 @@ public class CustomerServiceImpl implements CustomerService {
 	@Override
 	@Transactional
 	public List<Customer> searchCustomers(String theSearchName) {
-		// TODO Auto-generated method stub
 		return customerDAO.searchCustomers(theSearchName);
+	}
+
+	@Override
+	@Transactional
+	public List<Customer> getCustomers(int theSortField) {
+		return customerDAO.getCustomers(theSortField);
 	}
 }

@@ -12,7 +12,7 @@ import com.madhu.demo.entity.Customer;
  *
  */
 public interface CustomerService {
-	public List<Customer> getCustomers();
+	//public List<Customer> getCustomers();
 
 	public void saveCustomer(Customer theCustomer);
 
@@ -21,4 +21,6 @@ public interface CustomerService {
 	public void deleteCustomer(int theId);
 
 	public List<Customer> searchCustomers(String theSearchName);
+	
+	public List<Customer> getCustomers(int theSortField);
 }

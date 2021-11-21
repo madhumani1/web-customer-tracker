@@ -1,3 +1,4 @@
+<%@page import="com.madhu.demo.util.SortUtils"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
@@ -41,9 +42,27 @@ List Customers
 			<!--  add our html table here -->
 			<table>
 				<tr>
-					<th>First Name</th>
+					<!-- <th>First Name</th>
 					<th>Last Name</th>
 					<th>Email</th>
+					<th>Action</th> -->
+				</tr>
+				<!-- setup header links for sorting -->
+				<!-- construct a sort link for first name -->
+				<c:url var="sortLinkFirstName" value="/customer/list">
+					<c:param name="sort" value="<%= Integer.toString(SortUtils.FIRST_NAME) %>" />
+				</c:url>
+				<c:url var="sortLinkLastName" value="/customer/list">
+					<c:param name="sort" value="<%= Integer.toString(SortUtils.LAST_NAME) %>" />
+				</c:url>
+				<c:url var="sortLinkEmail" value="/customer/list">
+					<c:param name="sort" value="<%= Integer.toString(SortUtils.EMAIL) %>" />
+				</c:url>
+				
+				<tr>
+					<th><a href="${sortLinkFirstName}">First Name</a></th>
+					<th><a href="${sortLinkLastName}">Last Name</a></th>
+					<th><a href="${sortLinkEmail}">Email</a></th>
 					<th>Action</th>
 				</tr>
 				

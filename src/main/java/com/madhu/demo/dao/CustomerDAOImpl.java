@@ -13,6 +13,7 @@ import org.springframework.stereotype.Repository;
 //import org.springframework.transaction.annotation.Transactional;
 
 import com.madhu.demo.entity.Customer;
+import com.madhu.demo.util.SortUtils;
 
 /**
  * @author 15197
@@ -40,7 +41,7 @@ public class CustomerDAOImpl implements CustomerDAO {
 	 * because we want this DAO implementation to run in the context of the transaction 
 	 * that was defined by the service layer. 
 	 */
-	@Override
+	/*@Override
 	//@Transactional
 	public List<Customer> getCustomers() {
 		// get the current Hibernate session
@@ -54,7 +55,7 @@ public class CustomerDAOImpl implements CustomerDAO {
 		
 		// return results
 		return customers;
-	}
+	}*/
 
 	@Override
 	public void saveCustomer(Customer theCustomer) {
@@ -120,6 +121,38 @@ public class CustomerDAOImpl implements CustomerDAO {
 		List<Customer> customers = theQuery.getResultList();
 		
 		// return the results 
+		return customers;
+	}
+
+	@Override
+	public List<Customer> getCustomers(int theSortField) {
+		// get the current Hibernate session
+		Session currentSession = sessionFactory.getCurrentSession();
+
+		// determine sort field
+		String theFieldName = null;
+		
+		switch(theSortField)	{
+		case SortUtils.FIRST_NAME:
+			theFieldName = "firstName";
+			break;
+		case SortUtils.LAST_NAME:
+			theFieldName = "lastName";
+			break;
+		case SortUtils.EMAIL:
+			theFieldName = "email";
+			break;
+			default:
+				// if nothing matches, the deault to sort by firstName
+				theFieldName="firstName";
+		}
+		
+		// create a query
+		String queryString = "from Customer order by "+theFieldName;
+		Query<Customer> theQuery = currentSession.createQuery(queryString,Customer.class);
+		
+		// execute query and get result list
+		List<Customer> customers = theQuery.getResultList();
 		return customers;
 	}
 

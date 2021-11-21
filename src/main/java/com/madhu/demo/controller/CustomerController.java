@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.madhu.demo.entity.Customer;
 import com.madhu.demo.service.CustomerService;
+import com.madhu.demo.util.SortUtils;
 
 /**
  * @author 15197
@@ -41,7 +42,7 @@ public class CustomerController {
 	private CustomerService customerService;
 	
 	/* @RequestMapping("/list") */
-	@GetMapping("/list")
+	/*@GetMapping("/list")
 	public String listCustomers(Model theModel)	{
 		// get customer from the DAO
 		//List<Customer> theCustomers = customerDAO.getCustomers();
@@ -52,7 +53,7 @@ public class CustomerController {
 		theModel.addAttribute("customers", theCustomers);	// customers name and theCustomers value
 		
 		return "list-customers";
-	}
+	}*/
 	
 	@GetMapping("/showFormForAdd")
 	public String showFormForAdd(Model theModel)	{
@@ -94,6 +95,26 @@ public class CustomerController {
 		// search customers from the service
 		List<Customer> theCustomers = customerService.searchCustomers(theSearchName);
 		
+		// add the customer to the model
+		theModel.addAttribute("customers", theCustomers);
+		
+		return "list-customers";
+	}
+	
+	// Read Sort Field, if no mapping is provided then default to sortutil.first_name 
+	@GetMapping("/list")
+	public String listCustomers(Model theModel, @RequestParam(required=false) String sort)	{
+		// get customers from the service
+		List<Customer> theCustomers = null;
+		
+		// check for sort field
+		if(sort != null)	{
+			int theSortField = Integer.parseInt(sort);
+			theCustomers = customerService.getCustomers(theSortField);
+		}	else	{
+			// if no mapping is provided then default to sortutil.first_name
+			theCustomers = customerService.getCustomers(SortUtils.FIRST_NAME);
+		}
 		// add the customer to the model
 		theModel.addAttribute("customers", theCustomers);
 		

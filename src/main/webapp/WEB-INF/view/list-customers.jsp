@@ -1,4 +1,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -22,6 +24,19 @@ List Customers
 			<!-- showFormForAdd will call our Spring Controller Mapping -->
 			<input type="button" value="Add Customer"
 			onclick="window.location.href='showFormForAdd'; return false;" class="add-button" />
+			
+			<!--  add a search box -->
+			<form:form action="search" method="GET">
+				Search Customer: <input type="text" name="theSearchName" />
+				
+				<input type="submit" value="Search" class="add-button" />
+			</form:form>
+			
+			<div style="clear; both;"></div>
+				<p>
+					<a href="${pageContext.request.contextPath}/customer/list">Home</a>
+				</p>
+			</div>
 			
 			<!--  add our html table here -->
 			<table>
